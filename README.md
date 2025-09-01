@@ -1,8 +1,20 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+JamboAI - AI Health Assistant
+---
+![Portfolio Screenshot](Public/icon-192.png)
+---
+##  Features
 
-## Getting Started
+🩺 Medical Guidance: AI health advice supervised by licensed practitioners
 
-First, run the development server:
+📱 M-Pesa Payments: Seamless monthly subscriptions via Safaricom
+
+💬 AI Conversations: OpenAI GPT-4 powered health discussions
+
+🔒 Secure Data: DataStax AstraDB & MongoDB for secure storage
+
+📧 Notifications: Mailtrap for transaction emails
+
+## Quick Start
 
 ```bash
 npm run dev
@@ -16,21 +28,31 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Subscription
+Monthly plans via M-Pesa STK Push
 
-## Learn More
+Secure payment processing
 
-To learn more about Next.js, take a look at the following resources:
+Email confirmations via Mailtrap
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Easy cancellation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+##  Tech Stack
+Frontend: Next.js 15.5, TypeScript
 
-## Deploy on Vercel
+AI: OpenAI GPT-4 API
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Database: DataStax AstraDB, MongoDB
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Payments: M-Pesa Daraja API
+
+Emails: Mailtrap
+
+Auth: JWT, NextAuth
+
+#  Support
+For medical questions: practitioners@jamboai.com
+For technical support: support@jamboai.com
+
+# Disclaimer: AI suggestions will be  reviewed by medical professionals and require consultation with healthcare providers for medical decisions.
