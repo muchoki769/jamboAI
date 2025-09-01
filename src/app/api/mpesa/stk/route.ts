@@ -120,7 +120,8 @@ console.log('Password length:', password.length);
           PartyA: phone, // e.g. "2547XXXXXXXX"
           PartyB: process.env.MPESA_SHORTCODE,
           PhoneNumber: phone,
-          CallBackURL: "https://c416e099c124.ngrok-free.app", // must be public CallBackURL: "https://jamboAI.com/api/mpesa/callback"
+          CallBackURL: process.env.NEXT_PUBLIC_CALLBACK_URL,
+          // "https://c416e099c124.ngrok-free.app", // must be public CallBackURL: "https://jamboAI.com/api/mpesa/callback"
 
           AccountReference: "jamboAI",
           TransactionDesc: "Payment",
