@@ -9,7 +9,7 @@ export function middleware(request: NextRequest) {
 
    const isPublicPath = path === '/signIn' 
    || path === '/signUp'
-     || path ==='/verifyemail' || path === '/forgotPassword'
+     || path ==='/verifyemail' || path === '/forgotPassword' || path ==='/'
 
    const token = request.cookies.get('token')?.value || ''
 
