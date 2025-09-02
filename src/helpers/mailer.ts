@@ -54,14 +54,14 @@ export const sendEmail = async ({email,emailType,userId}:SendEmailParams) => {
         to: email,//"ndungudavidmuchoki@gmail.com",
         subject: emailType === "VERIFY" ? "Verify your email" : "Reset your password",
         html: //${process.env.DOMAIN}/${emailType === "VERIFY" ? "verifyemail" : "resetPassword"}?token=${rawToken}&id=${userId}
-        `<p>Click <a href="${process.env.DOMAIN}/${emailType === "VERIFY" ? "verifyemail" : "resetPassword"}?token=${rawToken}&id=${userId}">
+        `<p>Click <a href="${process.env.DOMAIN}/${emailType === "VERIFY" ? "verifyemail" : "resetPassword"}?token=${rawToken}">
         here</a>
         to ${emailType === "VERIFY" ? "verify your email" : "reset your password"}
         </p>
         
         <p>
         or copy paste the link below in your browser:
-        <br>${process.env.DOMAIN}/${emailType === "VERIFY" ? "verifyemail" : "resetPassword"}?token=${rawToken}&id=${userId}
+        <br>${process.env.DOMAIN}/${emailType === "VERIFY" ? "verifyemail" : "resetPassword"}?token=${rawToken}
         </p>
         <p>This link is valid for 3 hour</p>
         <p>If you did not request this email, please ignore it.</p>
