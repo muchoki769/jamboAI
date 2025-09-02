@@ -26,7 +26,7 @@ export function middleware(request: NextRequest) {
 export const config = {
 //   matcher: '/about/:path*',
     matcher:[
-        '/JamboAI/:path',
+        '/JamboAI/:path*',
         '/pay/:path*',
         
         // '/signup',
