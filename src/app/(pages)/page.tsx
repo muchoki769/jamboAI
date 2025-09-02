@@ -4,14 +4,14 @@ import { pricingPlans } from "@/pricing";
 import Image from "next/image";
 import {  BellAlertIcon, ChartBarIcon, LightBulbIcon } from "@heroicons/react/24/solid";
 import Footer from "@/components/Footer";
-import { redirect } from "next/navigation";
-import useAuth from "@/context/useAuth";
+// import { redirect } from "next/navigation";
+// import useAuth from "@/context/useAuth";
 
 export default function Home () {
-  const {authStatus} = useAuth();
-if (authStatus) {
-    redirect('/pay');
-  }
+//   const {authStatus} = useAuth();
+// if (authStatus) {
+//     redirect('/pay');
+//   }
   
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 to-teal-50">
