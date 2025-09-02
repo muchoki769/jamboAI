@@ -8,6 +8,7 @@ import {OpenAIStream,StreamingTextResponse } from "ai";
 
 
 
+
 import { DataAPIClient } from "@datastax/astra-db-ts";
 
 const {OPEN_AI_API_KEY,
@@ -81,7 +82,7 @@ export async function POST(req:Request) {
             stream: true,
             messages:[template, ...messages]
         })
-        const stream = OpenAIStream(response as any)
+        const stream = OpenAIStream(response )
         return new StreamingTextResponse(stream)
         
   } catch(err) {
