@@ -1,6 +1,12 @@
 import OpenAI from "openai";
 import {OpenAIStream,StreamingTextResponse } from "ai";
-import type { ChatCompletionChunk } from "openai/resources/chat/completions";
+// import type { ChatCompletionChunk } from "openai/resources/chat/completions";
+// import type { ChatCompletionChunk } from "openai/resources/chat";
+// import OpenAI, { ChatCompletionChunk } from "openai";
+// import { Stream } from "openai/streaming";
+// import { ChatCompletionChunk } from "openai"
+
+
 
 import { DataAPIClient } from "@datastax/astra-db-ts";
 
@@ -77,6 +83,7 @@ export async function POST(req:Request) {
         })
         const stream = OpenAIStream(response as any)
         return new StreamingTextResponse(stream)
+        
   } catch(err) {
     throw err
   }

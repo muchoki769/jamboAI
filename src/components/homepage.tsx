@@ -5,14 +5,14 @@ import Image from "next/image";
 import PromptSuggestionsRow from "./PromptSuggestionsRow";
 import Bubble from "./Bubble";
 import LoadingBubble from "./loadingBubble";
-import axios, { AxiosError } from "axios";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+// import axios, { AxiosError } from "axios";
+// import toast from "react-hot-toast";
+// import { useRouter } from "next/navigation";
 
 export default function HomePage () {
   const {append,messages, input, handleInputChange, handleSubmit} = useChat()
   const noMessages = !messages || messages.length === 0 ;
-  const router = useRouter();
+  // const router = useRouter();
 
   const handlePrompt = (promptText: string) => {
      const msg:Message = {
