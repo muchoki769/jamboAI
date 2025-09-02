@@ -2,6 +2,10 @@ import { connect } from "@/dbConfig/dbConfig";
 import transaction from "@/models/transaction";
 import { NextResponse } from "next/server";
 
+type CallbackItem = {
+  Name: string;
+  Value: string | number | null;
+};
 export async function POST(req: Request) {
   await connect();
   const body = await req.json();
@@ -25,7 +29,7 @@ export async function POST(req: Request) {
       resultCode: result.ResultCode,
       resultDesc: result.ResultDesc,
       mpesaReceiptNumber: result.CallbackMetadata?.Item?.find(
-        (i: any) => i.Name === "MpesaReceiptNumber"
+        (i: CallbackItem) => i.Name === "MpesaReceiptNumber"
       )?.Value,
       status,
     },

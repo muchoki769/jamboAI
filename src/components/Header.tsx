@@ -1,8 +1,8 @@
 "use client";
 import useAuth from "@/context/useAuth";
 import axios, { AxiosError } from "axios";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import toast from "react-hot-toast";
 
 export default function Header () {
@@ -48,15 +48,15 @@ export default function Header () {
                 <div className="container mx-auto px-4 flex justify-between items-center">
                     <div className="flex items-center">
                         
-                        <a href="/" className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-sm">
-                            jambo</a>
+                        <Link href="/" className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-sm">
+                            jambo</Link>
                             <span className="ml-3 text-xl font-semibold text-blue-800">jambo.AI</span>
                         </div>
                         
                         <div className="hidden md:flex space-x-8">
-                            <a href="#features" className="text-gray-600 hover:text-blue-600">Features</a>
-                            <a href="#pricing" className="text-gray-600 hover:text-blue-600">Pricing</a>
-                            <a href="#faq" className="text-gray-600 hover:text-blue-600">FAQ</a>
+                            <Link href="#features" className="text-gray-600 hover:text-blue-600">Features</Link>
+                            <Link href="#pricing" className="text-gray-600 hover:text-blue-600">Pricing</Link>
+                            <Link href="#faq" className="text-gray-600 hover:text-blue-600">FAQ</Link>
                         </div>
                         {/* <a href="/signIn"                         
                         className="bg-blue-600 cursor-pointer hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium transition-colors"

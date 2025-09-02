@@ -1,7 +1,7 @@
 JamboAI - AI Health Assistant
----
-![Portfolio Screenshot](Public/icon-192.png)
----
+
+![jamboAI Screenshot](Public/icon-192.png)
+
 ##  Features
 
 🩺 Medical Guidance: AI health advice supervised by licensed practitioners

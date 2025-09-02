@@ -24,7 +24,10 @@ const ProtectedLayout = ({children} : {children:React.ReactNode}) => {
         const res = await fetch("/api/users/status", { credentials: "include" });
         const data = await res.json();
         setAuthStatus(data.loggedIn); // backend should return { loggedIn: true/false }
+        // setAuthStatus(data.authStatus);
+
       } catch (err) {
+        console.error("Logout failed:", err);
         setAuthStatus(false);
       } finally {
         setLoader(false);
@@ -33,22 +36,22 @@ const ProtectedLayout = ({children} : {children:React.ReactNode}) => {
     checkAuth();
   }, []);
 
-   const login = async (email: string, password: string) => {
-    const res = await fetch("/api/users/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-      credentials: "include", // keep session cookie
-    });
-    if (res.ok) {
-      setAuthStatus(true);
-    }
-    return res.json();
-  };
-    const logout = async () => {
-    await fetch("/api/users/logout", { method: "POST", credentials: "include" });
-    setAuthStatus(false);
-  };
+  //  const login = async (email: string, password: string) => {
+  //   const res = await fetch("/api/users/login", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ email, password }),
+  //     credentials: "include", // keep session cookie
+  //   });
+  //   if (res.ok) {
+  //     setAuthStatus(true);
+  //   }
+  //   return res.json();
+  // };
+  //   const logout = async () => {
+  //   await fetch("/api/users/logout", { method: "POST", credentials: "include" });
+  //   setAuthStatus(false);
+  // };
 
      return<AuthProvider value={{authStatus, setAuthStatus}}>
       

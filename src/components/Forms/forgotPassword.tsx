@@ -2,7 +2,7 @@
 
 import { ForgotPasswordFormValidation, ForgotPasswordFormValidationType } from "@/app/lib/validations";
 import { AtSymbolIcon } from "@heroicons/react/24/outline";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import Link from "next/link";
 import React,{FormEvent, useEffect,useState} from "react";
 import toast from "react-hot-toast";

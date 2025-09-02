@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 export default function HomePage () {
-  const {append, isLoading,messages, input, handleInputChange, handleSubmit} = useChat()
+  const {append,messages, input, handleInputChange, handleSubmit} = useChat()
   const noMessages = !messages || messages.length === 0 ;
   const router = useRouter();
 
@@ -22,24 +22,7 @@ export default function HomePage () {
       }
       append(msg)
   }
-   const logout = async () =>  {
-        try{
-            await axios.get("/api/users/logout")
-            toast.success("Logout successfully")
-            router.push("/signIn")
-        } catch(err: unknown) {
-            const error = err as AxiosError<{message: string}>;
-            
-            if (error.response?.data?.message) {
-                toast.error(error.response.data.message);
-            } else if (error.message) {
-                toast.error(error.message);
-            } else{
-                toast.error("Something went wrong")
-            }
-            
-        }
-    }
+   
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4  bg-gray-100 w-full ">

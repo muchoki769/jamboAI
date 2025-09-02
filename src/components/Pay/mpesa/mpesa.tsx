@@ -1,27 +1,25 @@
 
 'use client';
-
-
 import {  useState } from "react"
 import STKPushQueryLoading from "./stkQueryLoading";
 import PaymentSuccess from "./success";
 
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 export default function Mpesa () {
-    const [ dataFromForm, setDataFromForm]= useState<dataFromForm>({
-        mpesa_phone: "",
-        name: "",
-        amount: 0,
-    });
+    // const [ dataFromForm, setDataFromForm]= useState<dataFromForm>({
+    //     mpesa_phone: "",
+    //     name: "",
+    //     amount: 0,
+    // });
        const [phone, setPhone] = useState("");
         const [amount, setAmount] = useState<number | null>(null);
-    const [loading, setLoading] = useState <boolean> (false);
-     const [success, setSuccess] = useState<boolean>(false);
-  const [stkQueryLoading, setStkQueryLoading] = useState<boolean>(false);
-  const [setError,setErrorMessage] = useState<string>('');
-  const [status, setStatus] = useState("PENDING");
-  const router = useRouter();  
+    const [loading, ] = useState <boolean> (false);
+     const [success,] = useState<boolean>(false);
+  const [stkQueryLoading, ] = useState<boolean>(false);
+//   const [setError,setErrorMessage] = useState<string>('');
+//   const [status, setStatus] = useState("PENDING");
+//   const router = useRouter();  
    
 const handlePay = async () => {
        
@@ -63,9 +61,10 @@ const handlePay = async () => {
     //     return() => clearInterval(interval);
     // }, [checkoutrequestId,router]);
   
-  //   if (!checkoutRequestId) return;
+//     if (!checkoutRequestId) return;
 //     const interval = setInterval(async () => {
 //       try {
+        
 //         const res = await fetch(`/api/mpesa/status?checkoutRequestId=${checkoutRequestId}`);
 //         if (!res.ok) return;
 //         const data = await res.json();

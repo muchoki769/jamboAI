@@ -3,7 +3,7 @@ import React, { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {toast} from "react-hot-toast";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { AtSymbolIcon, EyeIcon, EyeSlashIcon, KeyIcon, UserIcon } from "@heroicons/react/24/outline";
 import { UserFormValidation, UserFormValidationType } from "@/app/lib/validations";
 import z from "zod";

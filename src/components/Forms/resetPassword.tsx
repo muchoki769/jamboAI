@@ -2,7 +2,7 @@
 
 import { ResetPasswordFormValidation, ResetPasswordFormValidationType } from "@/app/lib/validations";
 import { EyeIcon, EyeSlashIcon, KeyIcon } from "@heroicons/react/24/outline";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import {FormEvent, useEffect, useState} from "react";
 import toast from "react-hot-toast";
