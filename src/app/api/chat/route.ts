@@ -1,5 +1,7 @@
 import OpenAI from "openai";
-import {OpenAIStream,StreamingTextResponse} from "ai";
+import {OpenAIStream,StreamingTextResponse } from "ai";
+import type { ChatCompletionChunk } from "openai/resources/chat/completions";
+
 import { DataAPIClient } from "@datastax/astra-db-ts";
 
 const {OPEN_AI_API_KEY,
@@ -73,7 +75,7 @@ export async function POST(req:Request) {
             stream: true,
             messages:[template, ...messages]
         })
-        const stream = OpenAIStream(response)
+        const stream = OpenAIStream(response as any)
         return new StreamingTextResponse(stream)
   } catch(err) {
     throw err

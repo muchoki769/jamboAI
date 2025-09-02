@@ -22,3 +22,19 @@ type PromptSuggestionButtonProps = {
     onClick: () => void;
     text: string;
 };
+
+
+export interface ChatCompletionChunk {
+  id: string;
+  object: "chat.completion.chunk";
+  created: number;
+  model: string;
+  choices: {
+    delta: {
+      content?: string;
+      role?: "system" | "user" | "assistant" | "tool";
+    };
+    index: number;
+    finish_reason: string | null;
+  }[];
+}
