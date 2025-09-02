@@ -1,6 +1,6 @@
 JamboAI - AI Health Assistant
 
-![jamboAI Screenshot](Public/jamboai.png)
+![jamboAI Screenshot](public/jamboai.png)
 
 ##  Features
 
@@ -39,7 +39,7 @@ Email confirmations via Mailtrap
 Easy cancellation
 
 ##  Tech Stack
-Frontend: Next.js 15.5, TypeScript
+Framework: Next.js 15.5, TypeScript
 
 AI: OpenAI GPT-4 API
 
