@@ -82,7 +82,19 @@ export async function POST(req:Request) {
             stream: true,
             messages:[template, ...messages]
         })
-        const stream = OpenAIStream(response )
+        const stream = OpenAIStream(response as any )
+        //  const stream = new ReadableStream({
+        //     async start(controller) {
+        //     const encoder = new TextEncoder();
+        //     for await (const chunk of response) {
+        //         const content = chunk.choices[0]?.delta?.content || '';
+        //         if (content) {
+        //         controller.enqueue(encoder.encode(content));
+        //         }
+        //     }
+        //     controller.close();
+        //     },
+        // });
         return new StreamingTextResponse(stream)
         
   } catch(err) {
