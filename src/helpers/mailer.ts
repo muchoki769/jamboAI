@@ -19,16 +19,16 @@ export const sendEmail = async ({email,emailType,userId}:SendEmailParams) => {
             {
                 verifyToken: hashedToken,
                 verifyTokenExpiry:Date.now() + 10800000  //3600000 // 1 hour
-            }
-        //   {new:true, runValidators:true}
+            },
+          {new:true} //runValidators:true
         )
        } else if (emailType === "RESET") {
         await User.findByIdAndUpdate(userId, 
             {
                 forgotPasswordToken: hashedToken,
                 forgotPasswordTokenExpiry:Date.now() + 3600000 // 1 hour
-            }
-        //   {new:true, runValidators:true}
+            },
+          {new:true} //runValidators:true
         )
        }
        
@@ -58,7 +58,7 @@ export const sendEmail = async ({email,emailType,userId}:SendEmailParams) => {
         or copy paste the link below in your browser:
         <br>${process.env.DOMAIN}/${emailType === "VERIFY" ? "verifyemail" : "resetPassword"}?token=${hashedToken}
         </p>
-        <p>This link is valid for 1 hour</p>
+        <p>This link is valid for 3 hour</p>
         <p>If you did not request this email, please ignore it.</p>
         <p>Thanks,</p>
         <p>Team Awesome</p>
