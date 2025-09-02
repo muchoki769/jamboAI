@@ -18,7 +18,7 @@ export const sendEmail = async ({email,emailType,userId}:SendEmailParams) => {
         await User.findByIdAndUpdate(userId, 
             {
                 verifyToken: hashedToken,
-                verifyTokenExpiry:Date.now() + 3600000 // 1 hour
+                verifyTokenExpiry:Date.now() + 10800000  //3600000 // 1 hour
             }
         //   {new:true, runValidators:true}
         )
