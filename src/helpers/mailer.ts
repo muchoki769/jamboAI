@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 import User from '../models/userModel';
-import bcryptjs from 'bcryptjs';
+// import bcryptjs from 'bcryptjs';
 import crypto from "crypto";
 
 
@@ -16,11 +16,11 @@ export const sendEmail = async ({email,emailType,userId}:SendEmailParams) => {
         const rawToken = crypto.randomBytes(32).toString("hex");
         //create a hashed token
         // const hashedToken = await bcryptjs.hash(userId.toString(), 10)
-          const hashedToken = await bcryptjs.hash(rawToken, 10);  
+        //   const hashedToken = await bcryptjs.hash(rawToken, 10);  
        if (emailType === "VERIFY") {
         await User.findByIdAndUpdate(userId, 
             {
-                verifyToken: hashedToken,
+                verifyToken: rawToken,
                 verifyTokenExpiry:Date.now() + 10800000  //3600000 // 1 hour
             },
           {new:true} //runValidators:true
@@ -28,12 +28,14 @@ export const sendEmail = async ({email,emailType,userId}:SendEmailParams) => {
        } else if (emailType === "RESET") {
         await User.findByIdAndUpdate(userId, 
             {
-                forgotPasswordToken: hashedToken,
+                forgotPasswordToken: rawToken,
                 forgotPasswordTokenExpiry:Date.now() + 3600000 // 1 hour
             },
           {new:true} //runValidators:true
         )
        }
+
+       
        
        
      const  transport = nodemailer.createTransport({
@@ -51,7 +53,7 @@ export const sendEmail = async ({email,emailType,userId}:SendEmailParams) => {
         from:'"jamboAI"<no-reply@jasirisolutions.com>', //'"Demo App"<no-reply@demomailtrap.co>', 
         to: email,//"ndungudavidmuchoki@gmail.com",
         subject: emailType === "VERIFY" ? "Verify your email" : "Reset your password",
-        html: //${process.env.DOMAIN}/${emailType === "VERIFY" ? "verifyemail" : "resetPassword"}?token=${hashedToken}
+        html: //${process.env.DOMAIN}/${emailType === "VERIFY" ? "verifyemail" : "resetPassword"}?token=${rawToken}&id=${userId}
         `<p>Click <a href="${process.env.DOMAIN}/${emailType === "VERIFY" ? "verifyemail" : "resetPassword"}?token=${rawToken}&id=${userId}">
         here</a>
         to ${emailType === "VERIFY" ? "verify your email" : "reset your password"}
@@ -59,7 +61,7 @@ export const sendEmail = async ({email,emailType,userId}:SendEmailParams) => {
         
         <p>
         or copy paste the link below in your browser:
-        <br>${process.env.DOMAIN}/${emailType === "VERIFY" ? "verifyemail" : "resetPassword"}?token=${hashedToken}
+        <br>${process.env.DOMAIN}/${emailType === "VERIFY" ? "verifyemail" : "resetPassword"}?token=${rawToken}&id=${userId}
         </p>
         <p>This link is valid for 3 hour</p>
         <p>If you did not request this email, please ignore it.</p>
