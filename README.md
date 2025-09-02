@@ -1,6 +1,6 @@
 JamboAI - AI Health Assistant
 
-![jamboAI Screenshot](Public/icon-192.png)
+![jamboAI Screenshot](Public/jamboai.png)
 
 ##  Features
 
@@ -49,7 +49,7 @@ Payments: M-Pesa Daraja API
 
 Emails: Mailtrap
 
-Auth: JWT, NextAuth
+Auth: JWT
 
 #  Support
 For medical questions: practitioners@jamboai.com

@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer';
 import User from '../models/userModel';
 import bcryptjs from 'bcryptjs';
+import crypto from "crypto";
 
 
 type SendEmailParams ={
@@ -11,9 +12,11 @@ type SendEmailParams ={
 
 export const sendEmail = async ({email,emailType,userId}:SendEmailParams) => {
    try{
-        //create a hashed token
-        const hashedToken = await bcryptjs.hash(userId.toString(), 10)
 
+        const rawToken = crypto.randomBytes(32).toString("hex");
+        //create a hashed token
+        // const hashedToken = await bcryptjs.hash(userId.toString(), 10)
+          const hashedToken = await bcryptjs.hash(rawToken, 10);  
        if (emailType === "VERIFY") {
         await User.findByIdAndUpdate(userId, 
             {
@@ -48,8 +51,8 @@ export const sendEmail = async ({email,emailType,userId}:SendEmailParams) => {
         from:'"jamboAI"<no-reply@jasirisolutions.com>', //'"Demo App"<no-reply@demomailtrap.co>', 
         to: email,//"ndungudavidmuchoki@gmail.com",
         subject: emailType === "VERIFY" ? "Verify your email" : "Reset your password",
-        html: 
-        `<p>Click <a href="${process.env.DOMAIN}/${emailType === "VERIFY" ? "verifyemail" : "resetPassword"}?token=${hashedToken}">
+        html: //${process.env.DOMAIN}/${emailType === "VERIFY" ? "verifyemail" : "resetPassword"}?token=${hashedToken}
+        `<p>Click <a href="${process.env.DOMAIN}/${emailType === "VERIFY" ? "verifyemail" : "resetPassword"}?token=${rawToken}&id=${userId}">
         here</a>
         to ${emailType === "VERIFY" ? "verify your email" : "reset your password"}
         </p>

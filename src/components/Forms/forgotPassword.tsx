@@ -129,7 +129,7 @@ export default function ForgotPassword() {
                                     
                             </button>
 
-                            <p>Dont have an account? <Link href="/signup" className='text-blue-500'>SignUp</Link></p>
+                            <p>Dont have an account? <Link href="/signUp" className='text-blue-500'>SignUp</Link></p>
                                     
                                 </form>
 

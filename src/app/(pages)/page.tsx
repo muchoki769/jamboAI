@@ -4,6 +4,7 @@ import { pricingPlans } from "@/pricing";
 import Image from "next/image";
 import {  BellAlertIcon, ChartBarIcon, LightBulbIcon } from "@heroicons/react/24/solid";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 // import { redirect } from "next/navigation";
 // import useAuth from "@/context/useAuth";
 
@@ -25,7 +26,7 @@ export default function Home () {
                     AI-powered healthcare that understands you. Get personalized health insights, reminders, and recommendations.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
-                  <a href="/sigIn"
+                  <Link href="/signIn"
                   >
                     <button
                     // onClick={() => setLoginModalOpen(true)}
@@ -33,7 +34,7 @@ export default function Home () {
                     >
                     Get Started
                     </button>
-                    </a>
+                    </Link>
                     <button className="border border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-lg font-medium text-lg transition-colors" >
                         Learn More
 
@@ -167,13 +168,16 @@ export default function Home () {
       <section className="py-16 bg-gradient-to-r from-blue-600 to-teal-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to take control of your health?</h2>
+          
           {/* <p className="text-blue-100 text-xl max-w-2xl mx-auto mb-10">Join thousands of users who are already improving their health with S.AI</p> */}
+          <Link href="/signIn">
           <button 
             // onClick={() => setLoginModalOpen(true)}
             className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-lg font-medium text-lg transition-colors"
           >
             Get Started Today
           </button>
+          </Link>
         </div>
       </section>
       <Footer/>
