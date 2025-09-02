@@ -1,3 +1,4 @@
+
 import LoadingBubble from "./loadingBubble";
 
 const Bubble = ({message}:BubbleProps) => {

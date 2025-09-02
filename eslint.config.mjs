@@ -21,6 +21,7 @@ const eslintConfig = [
     ],
   },
   {
+    files: ["src/app/api/chat/route.ts"],
     rules : {
       "@typescript-eslint/no-explicit-any": "off",
     }
