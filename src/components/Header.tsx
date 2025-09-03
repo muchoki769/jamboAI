@@ -80,17 +80,17 @@ export default function Header () {
         // </button>
           <button 
             onClick={logout}
-            className="bg-blue-500 cursor-pointer hover:bg-blue-700 rounded-lg text-white font-medium py-2 px-4 p-3 mt-4 transition-colors">
+            className="bg-blue-500 cursor-pointer hover:bg-blue-700 rounded-lg text-white font-medium py-2 px-4 p-3  transition-colors">
                 Sign Out
                 </button>
       ) : (
         // If not logged in → show Sign In
-        <a
+        <Link
           href="/signIn"
           className="bg-blue-600 cursor-pointer hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium transition-colors"
         >
           Sign In
-        </a>
+        </Link>
       )}
       
                     </div>

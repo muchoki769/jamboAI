@@ -131,12 +131,16 @@ export default function Home () {
                     ))}
 
                     </ul>
+                    <Link
+                    href="/signIn"
+                    >
                     <button 
                     // onClick={() => setLoginModalOpen(true)}
                     className={`w-full py-3 rounded-lg font-medium mt-4 ${plan.isPopular ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-blue-100 hover:bg-blue-200 text-blue-700'}`}
                   >
                     Get Started
                   </button>
+                  </Link>
                     </div>
 
                 </div>

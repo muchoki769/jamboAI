@@ -12,27 +12,29 @@ export default function Mpesa () {
     //     name: "",
     //     amount: 0,
     // });
-       const [phone, setPhone] = useState("");
-        const [amount, setAmount] = useState<number | null>(null);
-    const [loading, ] = useState <boolean> (false);
-     const [success,] = useState<boolean>(false);
+  const [phone, setPhone] = useState("");
+  const [amount, setAmount] = useState<number | null>(null);
+  const [loading, ] = useState <boolean> (false);
+  const [success,] = useState<boolean>(false);
   const [stkQueryLoading, ] = useState<boolean>(false);
 //   const [setError,setErrorMessage] = useState<string>('');
-//   const [status, setStatus] = useState("PENDING");
+  const [status, setStatus] = useState("PENDING");
 //   const router = useRouter();  
    
-const handlePay = async () => {
-       
+const handlePay = async (e: React.FormEvent) => {
+       e.preventDefault();
       const res = await fetch("/api/mpesa/stk", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone, amount }),
       });
       const data = await res.json();
+        // const {checkoutRequestId }  = await res.json();
+        const {checkoutRequestId }  = data;
+    //   const checkoutRequestId = data.CheckoutRequestID;
+    //    console.log(data);
+    console.log("checkoutRequestId from frontend:", data.checkoutRequestId);
 
-      const checkoutRequestId = data.CheckoutRequestID;
-       console.log(data);
-    // const {checkoutRequestId }  = await res.json();
     const interval = setInterval(async () => {
     const statusRes = await fetch(`/api/mpesa/status?checkoutRequestId=${checkoutRequestId}`);
     const statusData = await statusRes.json();
@@ -40,7 +42,7 @@ const handlePay = async () => {
     if (statusData.status !== "PENDING") {
         clearInterval(interval);
         // redirect to JamboAI page if success
-        if (statusData.status === "SUCCESS") {
+        if (statusData.ResultCode === "0") {
         window.location.href = "/JamboAI";
         }
     }
@@ -50,7 +52,7 @@ const handlePay = async () => {
     // useEffect(() => {
     //     const interval = setInterval(async () => {
             
-    //         const res = await fetch(`/api/mpesa/status?checkoutRequestId=${checkoutrequestId}`);
+    //         const res = await fetch(`/api/mpesa/status?checkoutRequestId=${checkoutRequestId}`);
     //         const data = await res.json();
     //         if (data.status === "SUCCESS") {
     //     clearInterval(interval);

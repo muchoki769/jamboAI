@@ -88,12 +88,12 @@ export async function POST(req: Request) {
   const { access_token } = await tokenRes.json();
 
   const timestamp = getTimestamp();
-  // const password = Buffer.from(
-  //   process.env.MPESA_SHORTCODE! + process.env.MPESA_PASSKEY! + timestamp
-  // ).toString("base64");
-   const password = Buffer.from(
-    `${process.env.MPESA_SHORTCODE} ${process.env.MPESA_PASSKEY } ${timestamp}`
+  const password = Buffer.from(
+    process.env.MPESA_SHORTCODE! + process.env.MPESA_PASSKEY! + timestamp
   ).toString("base64");
+  //  const password = Buffer.from(
+  //   `${process.env.MPESA_SHORTCODE}${process.env.MPESA_PASSKEY }${timestamp}`
+  // ).toString("base64");
 
   // Add debug logging to verify your credentials
 console.log('ShortCode:', process.env.MPESA_SHORTCODE);
@@ -124,15 +124,15 @@ console.log('Password length:', password.length);
           // "https://c416e099c124.ngrok-free.app", // must be public CallBackURL: "https://jamboAI.com/api/mpesa/callback"
 
           AccountReference: "jamboAI",
-          TransactionDesc: "Payment",
+          TransactionDesc: "Subscription Payment",
         }),
       }
     );
 
     const data = await res.json();
-
+    console.log("STK Response:", data);
     //save to db
-    await transaction.create({
+   const  tx = await transaction.create({
       phone,
       amount,
       merchantRequestId: data.MerchantRequestID,
@@ -140,15 +140,24 @@ console.log('Password length:', password.length);
       status: "PENDING",
 
     });
-    console.log("STK Response:", data);
-
+    
+  console.log("Saved Transaction:", tx);
     //  return NextResponse.json(data)
-    return NextResponse.json({checkoutRequestId: data.CheckoutRequestID});
+    return NextResponse.json({
+      checkoutRequestId: data.CheckoutRequestID,
+      merchantRequestId: data.MerchantRequestID,
+      // merchantRequestId: tx.MerchantRequestID,
+      // checkoutRequestId: tx.CheckoutRequestID
+    });
   } catch (error) {
     return NextResponse.json(
       { error: (error as Error).message },
       { status: 500 }
     );
   }
+//   } catch (dbErr) {
+//   console.error("DB Save Error:", dbErr);
+//   return NextResponse.json({ error: "DB save failed" }, { status: 500 });
+// }
 }
 
