@@ -98,7 +98,7 @@ export async function POST(request: NextRequest) {
             secure: process.env.NODE_ENV === "production",
             sameSite: "strict",
             path: "/",
-            // maxAge: 24 * 60 * 60 // 1 day in seconds
+            maxAge: 24 * 60 * 60 // 1 day in seconds
         })
         return response;
     } catch (error: unknown) {
