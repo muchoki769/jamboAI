@@ -7,10 +7,7 @@ import { useEffect, useState } from "react";
 const ProtectedLayout = ({children} : {children:React.ReactNode}) => {
      const [authStatus, setAuthStatus] = useState(false);
      const [loader, setLoader] = useState(true);
-     
-
-     
-
+    
 
     //  useEffect (() => {
     //     appwriteService.isLoggedIn()
@@ -25,7 +22,7 @@ const ProtectedLayout = ({children} : {children:React.ReactNode}) => {
         const data = await res.json();
         setAuthStatus(data.loggedIn); // backend should return { loggedIn: true/false }
         // setAuthStatus(data.authStatus);
-
+        // authStatus && console.log("User is authenticated");
       } catch (err) {
         console.error("Logout failed:", err);
         setAuthStatus(false);

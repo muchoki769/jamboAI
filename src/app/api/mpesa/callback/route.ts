@@ -6,8 +6,9 @@ type CallbackItem = {
   Name: string;
   Value: string | number | null;
 };
+connect();
 export async function POST(req: Request) {
-  await connect();
+  
   const body = await req.json();
   console.log("M-Pesa Callback: ", body);
 

@@ -68,8 +68,10 @@ function getTimestamp() {
   );
 }
 
+ connect()
+
 export async function POST(req: Request) {
-  await connect()
+  
   
   const { phone, amount } = await req.json();
 
@@ -144,20 +146,20 @@ console.log('Password length:', password.length);
   console.log("Saved Transaction:", tx);
     //  return NextResponse.json(data)
     return NextResponse.json({
-      checkoutRequestId: data.CheckoutRequestID,
-      merchantRequestId: data.MerchantRequestID,
-      // merchantRequestId: tx.MerchantRequestID,
-      // checkoutRequestId: tx.CheckoutRequestID
+      // checkoutRequestId: data.CheckoutRequestID,
+      // merchantRequestId: data.MerchantRequestID,
+      merchantRequestId: tx.MerchantRequestID,
+      checkoutRequestId: tx.CheckoutRequestID
     });
-  } catch (error) {
-    return NextResponse.json(
-      { error: (error as Error).message },
-      { status: 500 }
-    );
-  }
-//   } catch (dbErr) {
-//   console.error("DB Save Error:", dbErr);
-//   return NextResponse.json({ error: "DB save failed" }, { status: 500 });
-// }
+  // } catch (error) {
+  //   return NextResponse.json(
+  //     { error: (error as Error).message },
+  //     { status: 500 }
+  //   );
+  // }
+  } catch (dbErr) {
+  console.error("DB Save Error:", dbErr);
+  return NextResponse.json({ error: "DB save failed" }, { status: 500 });
+}
 }
 

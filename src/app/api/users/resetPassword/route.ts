@@ -9,8 +9,31 @@ connect();
 export async function POST(request: NextRequest) {
     try{
         const reqBody = await request.json();
-        const {token,password} = reqBody;
+        // const {token,password} = reqBody;
       
+        let token: string;
+        let password: string;
+
+        //extract token
+        if (typeof reqBody.token === 'string') {
+            token = reqBody.token;
+
+        } else {
+            return NextResponse.json({error: "Invalid token format"}, {status: 400});
+        }
+        //extract password
+        if (typeof reqBody.password === 'string') {
+            password = reqBody.password;
+        } else if (reqBody.password && typeof reqBody.password.password === 'string'){
+            password = reqBody.password.password;
+        } 
+        
+        else {
+            return NextResponse.json({error: "Invalid password format"}, {status: 400});
+        }
+        
+        // console.log("Extracted Token:", token, 'Password:', password);
+        
 
         // if(!token || !password || !confirmPassword) {
         //     return NextResponse.json({
@@ -31,8 +54,15 @@ export async function POST(request: NextRequest) {
         const user = await User.findOne({
             forgotPasswordToken: token,
             forgotPasswordTokenExpiry: {$gt: Date.now()},
-            password: {$ne: password}
+            // password: {$ne: password}
         });
+
+        const isSamePassword = await bcryptjs.compare(password, user.password);
+            if (isSamePassword) {
+                return NextResponse.json({
+                    error: "New password must be different from the old password"
+                }, {status: 400});
+            }
 
         console.log("User found:", user);
 
@@ -65,6 +95,10 @@ export async function POST(request: NextRequest) {
         });
         response.cookies.set("token", newtoken, {
             httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            path: "/",
+            // maxAge: 24 * 60 * 60 // 1 day in seconds
         })
         return response;
     } catch (error: unknown) {

@@ -1,9 +1,9 @@
 import { connect } from "@/dbConfig/dbConfig";
 import transaction from "@/models/transaction";
 import { NextResponse } from "next/server";
-
+connect();
 export async function POST (req: Request) {
-    await connect();
+    
     const {checkoutRequestId} = await req.json();
 
     const tx = await transaction.findOne({checkoutRequestId});

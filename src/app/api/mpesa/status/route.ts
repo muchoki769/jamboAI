@@ -22,14 +22,12 @@ import { connect } from "@/dbConfig/dbConfig";
 import transaction from "@/models/transaction";
 import { NextResponse } from "next/server";
 
-
+ connect();
 
 export  async function GET(req: Request) {
 
-
-
   try { 
-     await connect();
+   
     const { searchParams } = new URL(req.url);
     const checkoutRequestId = searchParams.get("checkoutRequestId");
 

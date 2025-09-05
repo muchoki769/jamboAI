@@ -29,7 +29,7 @@ export const sendEmail = async ({email,emailType,userId}:SendEmailParams) => {
         await User.findByIdAndUpdate(userId, 
             {
                 forgotPasswordToken: rawToken,
-                forgotPasswordTokenExpiry:Date.now() + 3600000 // 1 hour
+                forgotPasswordTokenExpiry:Date.now() + 10800000 //3600000 // 1 hour
             },
           {new:true} //runValidators:true
         )

@@ -33,7 +33,7 @@ const handlePay = async (e: React.FormEvent) => {
         const {checkoutRequestId }  = data;
     //   const checkoutRequestId = data.CheckoutRequestID;
     //    console.log(data);
-    console.log("checkoutRequestId from frontend:", data.checkoutRequestId);
+    
 
     const interval = setInterval(async () => {
     const statusRes = await fetch(`/api/mpesa/status?checkoutRequestId=${checkoutRequestId}`);
@@ -42,7 +42,7 @@ const handlePay = async (e: React.FormEvent) => {
     if (statusData.status !== "PENDING") {
         clearInterval(interval);
         // redirect to JamboAI page if success
-        if (statusData.ResultCode === "0") {
+        if (statusData.status === "SUCCESS") {
         window.location.href = "/JamboAI";
         }
     }

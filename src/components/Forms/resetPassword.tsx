@@ -14,7 +14,8 @@ import z from "zod";
 export default function ResetPassword() {
     const [token, setToken] = useState("");
     const [password, setPassword] = useState<ResetPasswordFormValidationType>({
-        password: ""
+        password: "",
+        // token: token
     });
     const router = useRouter();
     const [loading, setLoading] = useState(false);
@@ -36,28 +37,18 @@ export default function ResetPassword() {
         try{
            
             ResetPasswordFormValidation.parse(password);
-            await axios.post("/api/users/resetPassword", {
-                token,
+            await axios.post("/api/users/resetPassword", 
+                   
+            
+             { 
                 password,
-            });
+                token 
+             }
+              
+            );
             toast.success("Password reset successfully");
-            router.push("/login");
-    //     } catch (err: unknown) {
-    //         const error = err as AxiosError<{message: string}>;
-    //         if (error.response?.data?.message) {
-    //             console.log(error.response.data.message);
-    //             toast.error(error.response.data.message);
-    //         } else if (error.message) {
-    //             console.log(error.message);
-    //             toast.error(error.message);
-    //         } else{
-    //             toast.error("Something went wrong");
-    //         }
-          
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
+            router.push("/signIn");
+   
       } catch(err: unknown){
                                  
                         setError(true);

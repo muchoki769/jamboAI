@@ -52,6 +52,7 @@ export const ResetPasswordFormValidation = z.object ({
      .regex(/\d/,{message: "Password must contain at least one number"})
      .regex(/[\W_]/,{message: "Password must contain atleast one special character"})
      .trim(),
+     // token: z.string().min(1, {message: "Invalid or missing token"})
 })
 
 export type UserFormValidationType = z.infer<typeof UserFormValidation>;

@@ -28,7 +28,7 @@ export default function ForgotPassword() {
             try{
                 ForgotPasswordFormValidation.parse(email);
                 await axios.post('/api/users/forgotPassword',
-                    {email})
+                    email)
                 // setVerified(true);
                 toast.success("Check your email to reset password");
         //     } catch (err: unknown) {

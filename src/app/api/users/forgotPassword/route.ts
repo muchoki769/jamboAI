@@ -14,6 +14,7 @@ export async  function POST(request: NextRequest) {
 
         const user = await User.findOne({
          verifyToken: token,
+        // isVerified: true,
         //  verifyTokenExpiry: {$gt: Date.now()}, //greater than current time
         //  password: {$ne: password} // check if password is not same as old password
          email
