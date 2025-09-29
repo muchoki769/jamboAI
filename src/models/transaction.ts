@@ -10,11 +10,17 @@ const TransactionSchema = new Schema (
         phone: String,
         amount: Number,
         merchantRequestId: String,
-        checkoutRequestId: String,
+        checkoutRequestId: {
+            type: String,
+             unique: true,
+        },
         resultCode: String,
         resultDesc: String,
         mpesaReceiptNumber: String,
-        status: { type: String, default: "PENDING" },
+        status: { type: String, 
+           enum: ["PENDING", "SUCCESS", "FAILED"], 
+            default: "PENDING" 
+        },
 
         subscriptionType: {
             type: String,
@@ -33,6 +39,10 @@ const TransactionSchema = new Schema (
 },
     { timestamps: true }
 );
+
+
+TransactionSchema.index({ phone: 1 })
+TransactionSchema.index({ status: 1 })
 
 TransactionSchema.pre("save", function (next) {
     if (this.amount === 100) {
