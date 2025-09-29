@@ -38,19 +38,19 @@ export  async function GET(req: Request) {
 
     const tx = await transaction.findOne({ checkoutRequestId });
 
-    if (!tx) {
-      return NextResponse.json({ status: "NOT_FOUND" }, {status: 404});
-    }
-
-    if (tx.status === "pending") {
+   if (tx.status === "PENDING") {
       return NextResponse.json({ status: "PENDING" });
     }
 
-    if (tx.status === "success") {
+    if (tx.status === "PENDING") {
+      return NextResponse.json({ status: "PENDING" });
+    }
+
+    if (tx.status === "SUCCESS") {
       return NextResponse.json({ status: "SUCCESS" });
     }
 
-    return NextResponse.json({ status: "FAILED" });
+    return NextResponse.json({ status: tx.status });
   } catch (err) {
     // return NextResponse.status(500).json({ status: "ERROR" });
     console.error("Error fetching mpesa status:", err);

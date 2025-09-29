@@ -23,7 +23,7 @@ export async function POST(req: Request) {
   }
   const checkoutRequestId = result.CheckoutRequestID;
 
-  const status = result.resultCode === 0 ? "SUCCESS" : "FAILED";
+  const status = result.ResultCode === 0 ? "SUCCESS" : "FAILED";
 
   await transaction.findOneAndUpdate(
     {checkoutRequestId},

@@ -53,8 +53,9 @@
 //   }
 // }
 import { connect } from "@/dbConfig/dbConfig";
+import { getDataFromToken } from "@/helpers/getDataFromToken";
 import transaction from "@/models/transaction";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 function getTimestamp() {
   const date = new Date();
@@ -73,8 +74,9 @@ function getTimestamp() {
 export async function POST(req: Request) {
   
   
-  const { phone, amount } = await req.json();
-
+  const {phone, amount} = await req.json();
+  const nextreq = req as NextRequest; // Type assertion
+  const userId = getDataFromToken(nextreq); // or getDataFromToken(req) if using req
   // Get access token
   const tokenRes = await fetch(
     `${process.env.MPESA_BASE_URL}/oauth/v1/generate?grant_type=client_credentials`,
@@ -133,33 +135,45 @@ console.log('Password length:', password.length);
 
     const data = await res.json();
     console.log("STK Response:", data);
+
+    const subscriptionType = 
+      amount === 100 ? "basic" :
+      amount === 500 ? "pro" :
+      amount === 1000 ? "enterprise" :
+       undefined;
+    if (!subscriptionType) {
+      return NextResponse.json({ error: "Invalid amount for subscription" }, { status: 400 });
+    }  
     //save to db
    const  tx = await transaction.create({
+      userId,
       phone,
       amount,
       merchantRequestId: data.MerchantRequestID,
       checkoutRequestId: data.CheckoutRequestID,
       status: "PENDING",
+      subscriptionType,
+      // validUntil: new Date(new Date().setMonth(new Date().getMonth() + 1)),
 
     });
     
   console.log("Saved Transaction:", tx);
     //  return NextResponse.json(data)
     return NextResponse.json({
-      // checkoutRequestId: data.CheckoutRequestID,
-      // merchantRequestId: data.MerchantRequestID,
-      merchantRequestId: tx.MerchantRequestID,
-      checkoutRequestId: tx.CheckoutRequestID
+      checkoutRequestId: data.CheckoutRequestID,
+      merchantRequestId: data.MerchantRequestID,
+      // merchantRequestId: tx.MerchantRequestID,
+      // checkoutRequestId: tx.CheckoutRequestID
     });
-  // } catch (error) {
-  //   return NextResponse.json(
-  //     { error: (error as Error).message },
-  //     { status: 500 }
-  //   );
-  // }
-  } catch (dbErr) {
-  console.error("DB Save Error:", dbErr);
-  return NextResponse.json({ error: "DB save failed" }, { status: 500 });
-}
+  } catch (error) {
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 500 }
+    );
+  }
+//   } catch (dbErr) {
+//   console.error("DB Save Error:", dbErr);
+//   return NextResponse.json({ error: "DB save failed" }, { status: 500 });
+// }
 }
 

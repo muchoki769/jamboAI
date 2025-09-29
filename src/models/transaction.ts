@@ -1,7 +1,12 @@
 import mongoose, { Schema } from "mongoose";
 
 const TransactionSchema = new Schema (
-    {
+    {  
+         userId: { 
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "users", 
+         required: true
+     },
         phone: String,
         amount: Number,
         merchantRequestId: String,

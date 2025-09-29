@@ -1,6 +1,6 @@
 
 'use client';
-import {  useState } from "react"
+import { useState } from "react"
 import STKPushQueryLoading from "./stkQueryLoading";
 import PaymentSuccess from "./success";
 
@@ -20,6 +20,7 @@ export default function Mpesa () {
 //   const [setError,setErrorMessage] = useState<string>('');
   const [status, setStatus] = useState("PENDING");
 //   const router = useRouter();  
+
    
 const handlePay = async (e: React.FormEvent) => {
        e.preventDefault();
@@ -31,8 +32,10 @@ const handlePay = async (e: React.FormEvent) => {
       const data = await res.json();
         // const {checkoutRequestId }  = await res.json();
         const {checkoutRequestId }  = data;
+        
     //   const checkoutRequestId = data.CheckoutRequestID;
-    //    console.log(data);
+    //   const { checkoutRequestId } = response.data;
+       console.log(data);
     
 
     const interval = setInterval(async () => {
@@ -44,24 +47,31 @@ const handlePay = async (e: React.FormEvent) => {
         // redirect to JamboAI page if success
         if (statusData.status === "SUCCESS") {
         window.location.href = "/JamboAI";
+        setStatus
         }
     }
 }, 3000);
     };
+    
 
-    // useEffect(() => {
-    //     const interval = setInterval(async () => {
+//     useEffect(() => {
+//          if (!checkoutRequestId) return;
+//         const interval = setInterval(async () => {
             
-    //         const res = await fetch(`/api/mpesa/status?checkoutRequestId=${checkoutRequestId}`);
-    //         const data = await res.json();
-    //         if (data.status === "SUCCESS") {
-    //     clearInterval(interval);
-    //     router.push("/JamboAI"); // redirect after success
-    //   }
-    //   setStatus(data.status);
-    //     }, 4000);
-    //     return() => clearInterval(interval);
-    // }, [checkoutrequestId,router]);
+//             const res = await fetch(`/api/mpesa/status?checkoutRequestId=${checkoutRequestId}`);
+//             const data = await res.json();
+            
+            
+//             if (data.status === "SUCCESS") {
+//         clearInterval(interval);
+//         router.push("/JamboAI"); // redirect after success
+//       }
+//       setStatus(data.status);
+//         }, 4000);
+//         return() => clearInterval(interval);
+//     }, [checkoutRequestId,router]);
+
+// };
   
 //     if (!checkoutRequestId) return;
 //     const interval = setInterval(async () => {
@@ -91,7 +101,7 @@ const handlePay = async (e: React.FormEvent) => {
 
   
     return (
-        <div className="bg-gray-100 max-w-400 h-screen p-4 flex justify-center items-center">
+        <div className="bg-gray-100  py-4 px-4 flex justify-center items-center">
             {stkQueryLoading ?  (
                  <STKPushQueryLoading number={phone}/>
             ): success ? (
@@ -100,8 +110,8 @@ const handlePay = async (e: React.FormEvent) => {
         <div className="lg:pl-12">
             <div className="overflow-hidden rounded-md bg-white">
                 <div className="p-6 sm:p-10">
-                    {/* <div>Payment Status: {status}</div> */}
-                    
+                    <div>Payment Status: {status}</div>
+                     
 
                     <form onSubmit={handlePay}  className="mt-4 ">
 

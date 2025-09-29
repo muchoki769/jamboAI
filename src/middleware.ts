@@ -14,12 +14,14 @@ export function middleware(request: NextRequest) {
    const token = request.cookies.get('token')?.value || ''
 
    if(isPublicPath && token) {
-    return NextResponse.redirect(new URL('/JamboAI', request.nextUrl))
+    return NextResponse.redirect(new URL('/pay', request.nextUrl))
    }
 
    if (!isPublicPath && !token) {
     return NextResponse.redirect(new URL('/signIn',  request.nextUrl))
    }
+
+   return NextResponse.next();
 }
  
 // See "Matching Paths" below to learn more
@@ -28,6 +30,11 @@ export const config = {
     matcher:[
         '/JamboAI/:path*',
         '/pay/:path*',
+        '/signIn',
+        '/signUp',
+        '/verifyemail',
+        '/forgotPassword',
+        '/',
         
         // '/signup',
         // '/login',
