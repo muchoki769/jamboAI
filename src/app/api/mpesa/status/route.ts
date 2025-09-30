@@ -92,7 +92,7 @@ async function queryStkStatus(checkoutRequestId: string) {
       .slice(0, 14)
 
     // Generate password
-    const businessShortCode = process.env.MPESA_BUSINESS_SHORT_CODE
+    const businessShortCode = process.env.MPESA_SHORTCODE
     const passkey = process.env.MPESA_PASSKEY
     const password = Buffer.from(`${businessShortCode}${passkey}${timestamp}`).toString("base64")
 

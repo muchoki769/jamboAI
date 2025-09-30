@@ -74,7 +74,7 @@ export default function Mpesa(): ReactElement {
           setStkQueryLoading(false)
           setLoading(false)
         }
-      }, 3000)
+      }, 10000)
     } catch (error) {
       console.error("Payment error:", error)
       setLoading(false)

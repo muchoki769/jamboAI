@@ -93,7 +93,7 @@ export async function POST(req: Request) {
 
   const timestamp = getTimestamp();
   const password = Buffer.from(
-    process.env.MPESA_SHORTCODE! + process.env.MPESA_PASSKEY! + timestamp
+    process.env.MPESA_SHORTCODE!+process.env.MPESA_PASSKEY!+timestamp
   ).toString("base64");
   //  const password = Buffer.from(
   //   `${process.env.MPESA_SHORTCODE}${process.env.MPESA_PASSKEY }${timestamp}`
