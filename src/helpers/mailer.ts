@@ -4,11 +4,15 @@ import User from '../models/userModel';
 import crypto from "crypto";
 
 
-type SendEmailParams ={
+type SendEmailParams =
+{
    email: string;
-   emailType: "VERIFY" | "RESET";
+   emailType: "VERIFY" | "RESET" ;
    userId: string;
-};
+
+}
+
+
 
 export const sendEmail = async ({email,emailType,userId}:SendEmailParams) => {
    try{
