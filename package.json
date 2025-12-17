@@ -15,7 +15,7 @@
     "@heroicons/react": "^2.2.0",
     "@langchain/community": "^0.3.53",
     "@langchain/core": "^0.3.72",
-    "ai": "^5.0.114",
+    "ai": "^3.3.3",
     "axios": "^1.11.0",
     "bcryptjs": "^3.0.2",
     "dotenv": "^16.6.1",
